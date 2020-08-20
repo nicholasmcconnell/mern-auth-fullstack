@@ -13,21 +13,28 @@ app.use(cors());
 
 const PORT = process.env.PORT || 5000;
 
-//set up routes
+// Serve up static assets (usually on heroku)
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+  }
 
+//set up routes
 app.use(routes);
 
 
 // set up mongoose
 //ADD BACK IN ONCE TIED TO HEROKU DATABASE
 // process.env.MONGODB_URI ||
+//"mongodb://localhost/todos" || 
+//|| 
 mongoose.connect(
-    ("mongodb://localhost/mern-auth-fullstack" || process.env.MONGODB_CONNECTION_STRING), {
+    ("mongodb://localhost/mern-auth-fullstack"), {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useCreateIndex: true,
     }, (err) => {
         if(err){
+            console.log(err);
             throw err;
         } else{ 
         (console.log("Connection to database established"));

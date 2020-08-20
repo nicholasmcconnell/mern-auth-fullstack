@@ -84,6 +84,7 @@ module.exports = {
                 }
             })
         } catch (err) {
+            console.log(err)
             res.status(500).json({ error: err.message })
         }
     },
@@ -116,7 +117,6 @@ module.exports = {
             const user = await User.findById(verified.id);
           
             if (!user){
-                ("in user if statement")
                 return res.json(false);
             }
 
